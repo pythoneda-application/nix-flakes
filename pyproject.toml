@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "pythoneda-nix-flakes-application"
+version = "0.0.1a1"
+description = "Application layer of PythonEDA Nix Flakes package"
+authors = ["rydnr <github@acm-sl.org>"]
+readme = "README.md"
+packages = [{include = "PythonEDANixFlakesApplication"}]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+pythoneda-application-layer = "^0.0.1a3"
+pythoneda-nix-flakes = "^0.0.1a1"
+pythoneda-nix-flakes-infrastructure = "^0.0.1a1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
