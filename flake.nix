@@ -10,40 +10,39 @@
       inputs.flake-utils.follows = "flake-utils";
     };
     pythoneda = {
-      url = "github:rydnr/pythoneda/0.0.1a5";
+      url = "github:pythoneda/base/0.0.1a7";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.poetry2nix.follows = "poetry2nix";
     };
-    pythoneda-infrastructure-layer = {
-      url = "github:rydnr/pythoneda-infrastructure-layer/0.0.1a2";
+    pythoneda-infrastructure-base = {
+      url = "github:pythoneda-infrastructure/base/0.0.1a5";
       inputs.pythoneda.follows = "pythoneda";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.poetry2nix.follows = "poetry2nix";
     };
-    pythoneda-application-layer = {
-      url = "github:rydnr/pythoneda-application-layer/0.0.1a3";
+    pythoneda-application-base = {
+      url = "github:pythoneda-application/base/0.0.1a5";
       inputs.pythoneda.follows = "pythoneda";
-      inputs.pythoneda-infrastructure-layer.follows =
-        "pythoneda-infrastructure-layer";
+      inputs.pythoneda-infrastructure-base.follows =
+        "pythoneda-infrastructure-base";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.poetry2nix.follows = "poetry2nix";
     };
     pythoneda-nix-flakes = {
-      url = "github:rydnr/pythoneda-nix-flakes/0.0.1a1";
+      url = "github:pythoneda/nix-flakes/0.0.1a2";
       inputs.pythoneda.follows = "pythoneda";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.poetry2nix.follows = "poetry2nix";
     };
-    pythoneda-nix-flakes-infrastructure = {
-      url = "github:rydnr/pythoneda-nix-flakes-infrastructure/0.0.1a1";
+    pythoneda-infrastructure-nix-flakes = {
+      url = "github:pythoneda-infrastructure/nix-flakes/0.0.1a2";
       inputs.pythoneda.follows = "pythoneda";
-      inputs.pythoneda-infrastructure-layer.follows =
-        "pythoneda-infrastructure-layer";
-      inputs.pythoneda-git-repositories.follows = "pythoneda-git-repositories";
+      inputs.pythoneda-infrastructure-base.follows =
+        "pythoneda-infrastructure-base";
       inputs.nixos.follows = "nixos";
       inputs.flake-utils.follows = "flake-utils";
       inputs.poetry2nix.follows = "poetry2nix";
@@ -58,22 +57,23 @@
         pythonPackages = python.pkgs;
         description = "Application layer of PythonEDA Nix Flakes";
         license = pkgs.lib.licenses.gpl3;
+        homepage = "https://github.com/pythoneda-application/nix-flakes";
         maintainers = with pkgs.lib.maintainers; [ ];
       in rec {
         packages = {
-          pythoneda-nix-flakes-application =
+          pythoneda-application-nix-flakes =
             pythonPackages.buildPythonPackage rec {
-              pname = "pythoneda-nix-flakes-application";
-              version = "0.0.1a1";
+              pname = "pythoneda-application-nix-flakes";
+              version = "0.0.1a2";
               src = ./.;
               format = "pyproject";
 
               nativeBuildInputs = [ pkgs.poetry ];
 
               propagatedBuildInputs = with pythonPackages; [
-                pythoneda-application-layer.packages.${system}.pythoneda-application-layer
+                pythoneda-application-base.packages.${system}.pythoneda-application-base
+                pythoneda-infrastructure-nix-flakes.packages.${system}.pythoneda-infrastructure-nix-flakes
                 pythoneda-nix-flakes.packages.${system}.pythoneda-nix-flakes
-                pythoneda-nix-flakes-infrastructure.packages.${system}.pythoneda-nix-flakes-infrastructure
               ];
 
               checkInputs = with pythonPackages; [ pytest ];
@@ -84,7 +84,7 @@
                 inherit description license homepage maintainers;
               };
             };
-          default = packages.pythoneda-nix-flakes-application;
+          default = packages.pythoneda-application-nix-flakes;
           meta = with lib; {
             inherit description license homepage maintainers;
           };
