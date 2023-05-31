@@ -318,16 +318,16 @@
         "pythoneda-nix-flakes": "pythoneda-nix-flakes"
       },
       "locked": {
-        "lastModified": 1685556398,
-        "narHash": "sha256-67PL+o7KLKqY0XIdserEN43BrFrkK4XoHzpoDdQwDjI=",
+        "lastModified": 1685558273,
+        "narHash": "sha256-n/xkdjv34t1DR4enRyopf+/F/YzPh7yeTPCa14mk2Gs=",
         "owner": "pythoneda-infrastructure",
         "repo": "nix-flakes",
-        "rev": "2c70bf8db5e05dce7d12c6b98e4985c7a5e39404",
+        "rev": "8051966628ca775f53dfb637c86d5f740b16287c",
         "type": "github"
       },
       "original": {
         "owner": "pythoneda-infrastructure",
-        "ref": "0.0.1a2",
+        "ref": "0.0.1a3",
         "repo": "nix-flakes",
         "type": "github"
       }
